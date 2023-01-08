@@ -7,8 +7,8 @@ commands:
          - run:
             name: install AWS CLI v2
             command: |
+               sudo apt update
                sudo apt-get -y install python3
-               sudo ln -s /usr/bin/python3 /usr/bin/pytho
                curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
                unzip awscli-bundle.zip
                sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
@@ -196,7 +196,9 @@ jobs:
           root: ~/
           paths:
             - project/.circleci/ansible/inventory.txt
-      # Here's where you will add some code to rollback on failure      
+
+      
+      - destroy-environment     
 
 #   configure-infrastructure:
 #     docker:
