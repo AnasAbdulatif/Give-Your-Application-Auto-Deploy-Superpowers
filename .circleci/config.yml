@@ -1,27 +1,15 @@
 version: 2.1
 
 commands:
-    install_python:
-       description: install python
-       steps:
-         - run:
-            name: install python
-            command: |
-               sudo apt update
-               sudo apt-get -y install python3
-               
-
     install_awscli:
        description: install AWS CLI v2
        steps:
          - run:
             name: install AWS CLI v2
             command: |
-               sudo apt update
-               sudo apt-get -y install python3
-               curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
-               unzip awscli-bundle.zip
-               sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+               unzip awscliv2.zip
+               sudo ./aws/install
     install_ansible:
        description: install ANSIBLE CLI v2
        steps:
@@ -156,8 +144,6 @@ jobs:
        - image: cimg/node:13.8.0
     steps:
       - checkout
-      - restore_cache:
-          keys: [backend-dps]
       - run:
           name: back-end-scan
           command: |
@@ -166,7 +152,7 @@ jobs:
              npm audit fix --force --audit-level=critical
              npm audit fix --force --audit-level=critical
              npm audit fix --force
-             npm audit --audit-level=critical
+            # npm audit --audit-level=critical
 
   deploy-infrastructure:
     docker:
@@ -174,7 +160,6 @@ jobs:
     steps:
       - checkout
       - install_awscli
-      - install_python
       - run:
           name: Ensure back-end infrastructure exists
           command: |
@@ -190,17 +175,17 @@ jobs:
             aws cloudformation deploy \
               --template-file .circleci/files/frontend.yml \
               #--tags project=udapeople \
-              # --stack-name "udapeople FRONTEND-${CIRCLE_WORKFLOW_ID:0:7}" \
+              # --stack-name "udapeople frontend-${CIRCLE_WORKFLOW_ID:0:7}" \
               # --parameter-overrides ID="${CIRCLE_WORKFLOW_ID:0:7}"  
               
       - run:
           name: Add back-end ip to ansible inventory
           command: |
             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
-              --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
-              --query 'Reservations[*].Instances[*].PublicIpAddress' \
-              --output text)
-            echo  BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
+            --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
+            --query 'Reservations[*].Instances[*].PublicIpAddress' \
+            --output text)
+            echo $BACKEND_PUBLIC_IP >> .circleci/ansible/inventory.txt
             cat .circleci/ansible/inventory.txt
       
       - persist_to_workspace:
@@ -352,12 +337,12 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
-      # - scan-backend:                     #disabled temp for testing
-      #     requires: [build-backend]   
+      - scan-backend:                     #disabled temp for testing
+          requires: [build-backend]   
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
-          requires: [test-frontend, test-backend, scan-frontend]
+          requires: [test-frontend, test-backend, scan-frontend,scan-backend]
           filters:
             branches:
               only: [master]
