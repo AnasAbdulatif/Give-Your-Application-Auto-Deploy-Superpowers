@@ -1,6 +1,27 @@
 version: 2.1
 
-# commands:
+commands:
+    install_awscli:
+       description: install AWS CLI v2
+       steps:
+         - run:
+            name: install AWS CLI v2
+            command: |
+               curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip"
+               unzip awscli-bundle.zip
+               sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+    install_ansible:
+       description: install ANSIBLE CLI v2
+       steps:
+         - run:
+            name: install ANSIBLE CLI v2
+            command: |
+                sudo apt update
+                sudo apt install software-properties-common
+                sudo add-apt-repository --yes --update ppa:ansible/ansible
+                sudo apt install ansible
+
+
 #   destroy-environment:
 #     description: Destroy back-end and front-end cloudformation stacks given a workflow ID.
 #     parameters:
@@ -127,7 +148,6 @@ jobs:
              npm audit fix --force --audit-level=critical
              npm audit fix --force --audit-level=critical
              npm audit fix --force
-
              npm audit --audit-level=critical
 
 #   deploy-infrastructure:
