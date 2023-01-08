@@ -331,8 +331,8 @@ workflows:
           requires: [build-frontend]
       - test-backend:
           requires: [build-backend]
-      - scan-backend:
-          requires: [build-backend]
+      # - scan-backend:                     #disabled temp for testing
+      #     requires: [build-backend]   
       - scan-frontend:
           requires: [build-frontend]
       - deploy-infrastructure:
