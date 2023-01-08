@@ -11,3 +11,7 @@
 ### License
 
 [License](LICENSE.md)
+
+
+aws cloudformation deploy --template-file cloudfront.yml --stack-name InitialStack --parameter-overrides WorkfolwID=k0aehenb 
+
