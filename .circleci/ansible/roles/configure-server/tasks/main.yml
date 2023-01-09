@@ -17,15 +17,10 @@
   raw: test -e /usr/bin/python3 || (apt -y update && apt install -y python3)
   changed_when: false 
 
-- name : install ssss 
-  become: true
-  shell: |
-    pip3 install ansible-modules-pm2
-
 - name: "Install PM2 Globally"
-  npm:
-    name: pm2
-    global: yes
+
+  become_user: root
+  npm: name=pm2 global=yes
   
 
 
