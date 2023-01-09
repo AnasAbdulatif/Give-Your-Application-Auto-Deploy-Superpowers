@@ -330,12 +330,14 @@ jobs:
       - checkout
       - run:
           name: "Install curl"
-          command: |
-            apt-get install yum -y
-            yum install -y curl
            
+          command: |
+
+            sudo apt install -y curl 
+          
       - run:
           name: Backend smoke test.
+          
           command: |
             BACKEND_PUBLIC_IP=$(aws ec2 describe-instances \
               --filters "Name=tag:Name,Values=backend-${CIRCLE_WORKFLOW_ID:0:7}" \
