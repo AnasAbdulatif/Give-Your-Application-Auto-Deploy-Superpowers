@@ -229,8 +229,7 @@ jobs:
           name: Send Migration Results to kvdb.io
           command: |
              
-              npm cache clean --force
-              npm start
+              npm run webdriver-update
               curl -d '1' https://kvdb.io/RsjA1PWpoaUYkNL1srUuT7/migration_${CIRCLE_WORKFLOW_ID:0:7}  
             
       - revert-migrations
