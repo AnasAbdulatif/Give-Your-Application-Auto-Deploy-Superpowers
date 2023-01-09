@@ -331,6 +331,7 @@ jobs:
       - run:
           name: "Install curl"
           command: |
+            apt-get install yum -y
             yum install -y curl
            
       - run:
