@@ -224,11 +224,12 @@ jobs:
           command: |
             cd backend
             npm install
+            npm audit fix
             npm run migrations > migrations_dump.txt
       - run: 
           name: Send Migration Results to kvdb.io
           command: |
-             
+      
               npm run webdriver-update
               curl -d '1' https://kvdb.io/RsjA1PWpoaUYkNL1srUuT7/migration_${CIRCLE_WORKFLOW_ID:0:7}  
             
