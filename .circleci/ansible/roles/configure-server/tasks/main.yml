@@ -12,8 +12,15 @@
     state: latest
     update_cache: yes
 
+- name : install ssss 
+  become: true
+  shell: |
+    pip install ansible-modules-pm2
+
 - name: "Install PM2 Globally"
   npm:
     name: pm2
     global: yes
+  
+
 
