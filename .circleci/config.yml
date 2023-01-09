@@ -271,7 +271,7 @@ jobs:
             
             echo $BACKEND_PUBLIC_IP >> frontend/.env
             cat .circleci/ansible/inventory.txt
-            
+
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             cat frontend/.env
 
@@ -370,7 +370,7 @@ jobs:
             else
               exit 2
             fi 
-      - destroy-environment 
+      # - destroy-environment 
       - revert-migrations
 
 #   cloudfront-update:
