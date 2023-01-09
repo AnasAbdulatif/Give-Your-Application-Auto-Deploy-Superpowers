@@ -20,7 +20,7 @@
 - name : install ssss 
   become: true
   shell: |
-    pip install ansible-modules-pm2
+    pip3 install ansible-modules-pm2
 
 - name: "Install PM2 Globally"
   npm:
