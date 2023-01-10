@@ -274,7 +274,9 @@ jobs:
 
             echo "API_URL=http://${BACKEND_PUBLIC_IP}:3030" >> frontend/.env
             cat frontend/.env
-            curl "${API_URL}/api/status"
+            if curl "${API_URL}/api/status" | grep "ok"
+            then echo "okkkk"
+                
 
             
 
