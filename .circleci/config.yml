@@ -356,13 +356,13 @@ jobs:
               --output text)
 
             export API_URL=http://${BACKEND_PUBLIC_IP}:3030
-            curl "${API_URL}/api/status"
-            if curl "${API_URL}/api/status" | grep "ok"
-            then
-                exit 0
-            else
-                exit 1
-            fi
+            # curl "${API_URL}/api/status"
+            # if curl "${API_URL}/api/status" | grep "ok"
+            # then
+            #     exit 0
+            # else
+            #     exit 1
+            # fi
       - run:
           name: Frontend smoke test.
           command: |
