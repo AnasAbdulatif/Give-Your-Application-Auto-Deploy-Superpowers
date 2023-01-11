@@ -17,12 +17,12 @@
   raw: test -e /usr/bin/python || (apt -y update && apt install -y python3)
   changed_when: false 
 
-- name: Install Yarn NPM package globallyy
-  community.general.npm:
-    name: yarn@latest
-    global: true
-  environment:
-    PATH: /opt/nodejs/bin:{{ ansible_facts.env.PATH }}
+# - name: Install Yarn NPM package globallyy
+#   community.general.npm:
+#     name: yarn@latest
+#     global: true
+#   environment:
+#     PATH: /opt/nodejs/bin:{{ ansible_facts.env.PATH }}
 
 - name: install pm2 
   npm:
