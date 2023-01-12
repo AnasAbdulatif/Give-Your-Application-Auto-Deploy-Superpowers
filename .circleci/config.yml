@@ -400,7 +400,7 @@ jobs:
       - revert-migrations  
       
 
-cleanup: # createe cleanup
+  cleanup: # createe cleanup
     docker:
       - image: amazon/aws-cli
     steps:
