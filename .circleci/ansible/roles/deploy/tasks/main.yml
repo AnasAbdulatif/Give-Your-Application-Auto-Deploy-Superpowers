@@ -1,13 +1,14 @@
 ---
-- name: "create backend dir"
+- name: "Creates backend app directory"
+  become: true
   file:
-    path: ~/backend-app
-    state: directory
-
-- name: "unarchive backend files"
+      path: ~/backend-app
+      state: directory
+- name: "Unarchive backend files"
+  become: true
   unarchive:
-    src: artifact.tar.gz
-    dest: ~/backend-app
+      src: artifact.tar.gz
+      dest: ~/backend-app
 
 - name : "installing Node Dependancies"
   shell: |
@@ -28,5 +29,5 @@
 - name: "configure pm2 to start "
   become: true
   shell: |
-    env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
-    pm2 save
+     sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
+     pm2 save
