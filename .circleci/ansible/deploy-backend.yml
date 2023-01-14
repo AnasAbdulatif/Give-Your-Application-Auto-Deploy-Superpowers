@@ -1,8 +1,6 @@
 - name: "configuration play."
   hosts: web
-  become_user: root
-  become: true
-  user: ubuntu
+  remote_user: ubuntu
   gather_facts: false
   vars:
     - ansible_python_interpreter: /usr/bin/python3
