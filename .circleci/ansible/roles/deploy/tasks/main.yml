@@ -32,5 +32,8 @@
 
 - name: "configure pm2 to start "
   shell: |
+     env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu
+     pm2 save
      sudo su -c "env PATH=$PATH:/usr/local/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
+
      pm2 save
