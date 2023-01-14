@@ -30,7 +30,7 @@
   debug:
     msg: "{{execute_node.stdout_lines }}"
 
-- name: "configure pm2 to start "
+- name: "configure pm2 to start when reboot "
   shell: |
      pm2 startup 
      sudo su -c "env PATH=$PATH:/usr/bin pm2 startup systemd -u ubuntu --hp /home/ubuntu"
