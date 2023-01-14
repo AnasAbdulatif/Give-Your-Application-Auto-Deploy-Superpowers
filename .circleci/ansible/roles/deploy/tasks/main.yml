@@ -11,11 +11,15 @@
       dest: ~/backend-app
 
 - name : "installing Node Dependancies"
+  become: true
+
   shell: |
     cd ~/backend-app
     npm i
     
 - name: "execute node with pm2"
+  become: true
+
   shell: |
     cd ~/backend-app/dist
     pm2 stop default
