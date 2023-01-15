@@ -1,0 +1,21 @@
+Public Url to GitHub repository :
+
+(https://github.com/AnasAbdulatif/CICD-Project)
+-------------------------------------------------------
+
+Public URL for your S3 Bucket :
+(http://udapeople-e0fad8d.s3-website-us-east-1.amazonaws.com)
+-------------------------------------------------------
+
+Url  forcloudfront :
+(http://dcdzohnxl01zk.cloudfront.net)
+-------------------------------------------------------
+
+Url for backend instance:
+ec2-3-227-25-1.compute-1.amazonaws.com	
+-------------------------------------------------------
+
+Url for Prometheus 
+(http://ec2-107-23-23-242.compute-1.amazonaws.com:9090/targets )
+-------------------------------------------------------
+
