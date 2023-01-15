@@ -420,16 +420,13 @@ jobs:
             if [[ udapeople-${WorkflowID} =~ ${OLDWORKFLOWID} ]]
             then
               aws s3 rm "s3://udapeople-${OLDWORKFLOWID}" --recursive
-
-            else  
-             
-            
+              aws cloudformation delete-stack --stack-name "udapeople-backend-${OLDWORKFLOWID}"
+              aws cloudformation delete-stack --stack-name "udapeople-frontend-${OLDWORKFLOWID}"
+              echo cleaning confirmed
+            else
               echo cant clean
             fi
-            aws cloudformation delete-stack --stack-name "udapeople-backend-${OLDWORKFLOWID}"
-            aws cloudformation delete-stack --stack-name "udapeople-frontend-${OLDWORKFLOWID}"
-            echo cleaning confirmed
-
+               
 workflows:
   default:
     jobs:
